@@ -1,24 +1,31 @@
 import React from 'react'
-import unsplash from '../api/unsplash'
 import SearchBar from './SearchBar'
-import ImageList from './ImageList'
+import youtube from '../api/youtube'
+
+const KEY = 'AIzaSyDWydY4-ZWGGOSjU1Vks0LGS8JDkXPOH5Q'
 
 class App extends React.Component {
-  state = { images: [] }
+  state = { videos: [] }
 
-  onSearchSubmit = async (term) => {
-    const response = await unsplash.get('/search/photos', {
-      params: { query: term },
+  onTermSubmit = async (term) => {
+    const response = await youtube.get('/search', {
+      params: {
+        part: 'snippet',
+        type: 'video',
+        maxResults: 5,
+        key: `${KEY}`,
+        q: term,
+      },
     })
-    this.setState({ images: response.data.results })
+
+    this.setState({ videos: response.data.items })
   }
 
   render() {
     return (
-      <div className="ui container" style={{ marginTop: '10px' }}>
-        <SearchBar onSubmit={this.onSearchSubmit} />
-        Found: {this.state.images.length} images
-        <ImageList images={this.state.images} />
+      <div className="ui container">
+        <SearchBar onFormSubmit={this.onTermSubmit} />I have{' '}
+        {this.state.videos.length} videos.
       </div>
     )
   }
