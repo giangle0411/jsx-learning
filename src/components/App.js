@@ -4,7 +4,7 @@ import youtube from '../api/youtube'
 import VideoList from './VideoList'
 import VideoDetail from './VideoDetail'
 
-const KEY = 'AIzaSyDWydY4-ZWGGOSjU1Vks0LGS8JDkXPOH5Q'
+const KEY = '' //Insert your Youtube API generated credential key here
 
 class App extends React.Component {
   state = { videos: [], selectedVideo: null }
