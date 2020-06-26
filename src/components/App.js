@@ -1,55 +1,28 @@
 import React from 'react'
-import SearchBar from './SearchBar'
-import youtube from '../api/youtube'
-import VideoList from './VideoList'
-import VideoDetail from './VideoDetail'
-
-const KEY = '' //Insert your Youtube API generated credential key here
+import UserCreate from './UserCreate'
+import LanguageContext from '../contexts/LanguageContext'
+import ColorContext from '../contexts/ColorContext'
 
 class App extends React.Component {
-  state = { videos: [], selectedVideo: null }
+  state = { language: 'english' }
 
-  componentDidMount() {
-    this.onTermSubmit('puppies')
-  }
-
-  onTermSubmit = async (term) => {
-    const response = await youtube.get('/search', {
-      params: {
-        part: 'snippet',
-        type: 'video',
-        maxResults: 5,
-        key: `${KEY}`,
-        q: term,
-      },
-    })
-    this.setState({
-      videos: response.data.items,
-      selectedVideo: response.data.items[0],
-    })
-  }
-
-  onVideoSelect = (video) => {
-    this.setState({ selectedVideo: video })
+  onLangChange = (language) => {
+    this.setState({ language })
   }
 
   render() {
     return (
       <div className="ui container">
-        <SearchBar onFormSubmit={this.onTermSubmit} />
-        <div className="ui grid">
-          <div className="ui row">
-            <div className="eleven wide column">
-              <VideoDetail video={this.state.selectedVideo} />
-            </div>
-            <div className="five wide column">
-              <VideoList
-                onVideoSelect={this.onVideoSelect}
-                videos={this.state.videos}
-              />
-            </div>
-          </div>
+        <div>
+          Select a language:
+          <i className="flag us" onClick={() => this.onLangChange('english')} />
+          <i className="flag vn" onClick={() => this.onLangChange('vietnam')} />
         </div>
+        <ColorContext.Provider value="purple">
+          <LanguageContext.Provider value={this.state.language}>
+            <UserCreate />
+          </LanguageContext.Provider>
+        </ColorContext.Provider>
       </div>
     )
   }
