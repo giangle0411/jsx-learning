@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### language - an app created to learn about React Context System
+### hooks - an app created to learn about React Hooks System
 
 ## Available Scripts
 

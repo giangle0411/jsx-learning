@@ -1,22 +1,27 @@
-import React from 'react'
-import UserCreate from './UserCreate'
-import { LanguageStore } from '../contexts/LanguageContext'
-import ColorContext from '../contexts/ColorContext'
-import LanguageSelector from './LanguageSelector'
+import React, { useState } from 'react'
+import ResourceList from './ResourceList'
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="ui container">
-        <LanguageStore>
-          <LanguageSelector />
-          <ColorContext.Provider value="purple">
-            <UserCreate />
-          </ColorContext.Provider>
-        </LanguageStore>
+const App = () => {
+  const [resource, setResource] = useState('posts')
+  return (
+    <div className="ui container">
+      <div>
+        <button
+          className="ui button primary"
+          onClick={() => setResource('posts')}
+        >
+          Posts
+        </button>
+        <button
+          className="ui button orange"
+          onClick={() => setResource('todos')}
+        >
+          Todos
+        </button>
       </div>
-    )
-  }
+      <ResourceList resource={resource} />
+    </div>
+  )
 }
 
 export default App
