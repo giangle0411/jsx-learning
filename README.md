@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### season-display - getting into JSX and React Component with a simple season display app, updated with hooks
+### season-display - getting into JSX and React Component with a simple season display app
 
 ## Available Scripts
 
